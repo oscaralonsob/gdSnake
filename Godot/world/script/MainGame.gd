@@ -79,7 +79,7 @@ func apple_eaten() -> void:
 func check_game_over() -> void:
 	var head: Vector2 = snake_pos[0]
 	
-	if head.x > 12 or head.x < 0 or head.y > 20 or head.y < 0:
+	if head.x > 12 or head.x < 0 or head.y > 12 or head.y < 0:
 		reset();
 	
 	for part in snake_pos.slice(1, snake_pos.size() -1):
