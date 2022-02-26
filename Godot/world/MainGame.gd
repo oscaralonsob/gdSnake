@@ -15,6 +15,7 @@ func _ready():
 	apple_pos = place_apple()
 	draw_apple()
 	draw_snake()
+	get_tree().call_group('ScoreGroup', 'update_score', snake_pos.size())
 
 
 func _input(event):
@@ -71,6 +72,7 @@ func apple_eaten() -> void:
 	if snake_pos[0] == apple_pos:
 		apple_pos = place_apple()
 		grow_snake = true
+		get_tree().call_group('ScoreGroup', 'update_score', snake_pos.size() + 1)
 
 
 func check_game_over() -> void:
@@ -91,8 +93,8 @@ func reset() -> void:
 
 func _on_Timer_timeout():
 	clear_background()
-	move_snake()
 	apple_eaten()
+	move_snake()
 	check_game_over()
 	draw_apple()
 	draw_snake()
