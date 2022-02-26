@@ -15,7 +15,7 @@ func _ready():
 	apple_pos = place_apple()
 	draw_apple()
 	draw_snake()
-	get_tree().call_group('ScoreGroup', 'update_score', snake_pos.size())
+	EventBus.emit_signal("update_score_signal", snake_pos.size())
 
 
 func _input(event):
@@ -72,8 +72,8 @@ func apple_eaten() -> void:
 	if snake_pos[0] == apple_pos:
 		apple_pos = place_apple()
 		grow_snake = true
-		get_tree().call_group('ScoreGroup', 'update_score', snake_pos.size() + 1)
-		$EatSound.play()
+		EventBus.emit_signal("apple_eaten_signal")
+		EventBus.emit_signal("update_score_signal", snake_pos.size() + 1)
 
 
 func check_game_over() -> void:

@@ -14,6 +14,10 @@ config/name="Snake"
 run/main_scene="res://MainGame.tscn"
 config/icon="res://icon.png"
 
+[autoload]
+
+EventBus="*res://world/script/EventBus.gd"
+
 [display]
 
 window/size/width=800
