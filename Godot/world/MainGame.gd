@@ -73,6 +73,7 @@ func apple_eaten() -> void:
 		apple_pos = place_apple()
 		grow_snake = true
 		get_tree().call_group('ScoreGroup', 'update_score', snake_pos.size() + 1)
+		$EatSound.play()
 
 
 func check_game_over() -> void:
@@ -93,8 +94,8 @@ func reset() -> void:
 
 func _on_Timer_timeout():
 	clear_background()
-	apple_eaten()
 	move_snake()
+	apple_eaten()
 	check_game_over()
 	draw_apple()
 	draw_snake()
