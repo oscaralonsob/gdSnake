@@ -4,6 +4,7 @@ extends Node
 const SNAKE = 0
 const APPLE = 1
 const BG    = 2
+const GAME_SIZE = 30
 var apple_pos: Vector2 = Vector2(0,0)
 var snake_pos_origin: Array =  [Vector2(2,2), Vector2(2,1)]
 var snake_pos: Array = snake_pos_origin
@@ -34,8 +35,8 @@ func _input(event):
 
 func place_apple() -> Vector2:
 	randomize()
-	var x: int = randi() % 10
-	var y: int = randi() % 10
+	var x: int = randi() % GAME_SIZE
+	var y: int = randi() % GAME_SIZE
 	return Vector2(x, y)
 
 
@@ -50,9 +51,9 @@ func draw_snake() -> void:
 
 func clear_background() -> void:
 	var i: int = 0
-	while i <= 12:
+	while i <= GAME_SIZE:
 		var j: int =  0
-		while j <= 12:
+		while j <= GAME_SIZE:
 			$SnakeWorld.set_cell(i, j, BG)
 			j += 1
 		i += 1
@@ -79,7 +80,7 @@ func apple_eaten() -> void:
 func check_game_over() -> void:
 	var head: Vector2 = snake_pos[0]
 	
-	if head.x > 12 or head.x < 0 or head.y > 12 or head.y < 0:
+	if head.x > GAME_SIZE or head.x < 0 or head.y > GAME_SIZE or head.y < 0:
 		reset();
 	
 	for part in snake_pos.slice(1, snake_pos.size() -1):
