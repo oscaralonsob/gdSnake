@@ -8,6 +8,22 @@
 
 config_version=4
 
+_global_script_classes=[ {
+"base": "Node",
+"class": "Apple",
+"language": "GDScript",
+"path": "res://apple/script/Apple.gd"
+}, {
+"base": "Node",
+"class": "Snake",
+"language": "GDScript",
+"path": "res://snake/script/Snake.gd"
+} ]
+_global_script_class_icons={
+"Apple": "",
+"Snake": ""
+}
+
 [application]
 
 config/name="Snake"
