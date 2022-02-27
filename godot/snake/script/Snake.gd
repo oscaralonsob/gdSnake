@@ -17,11 +17,13 @@ func _ready() -> void:
 	EventBus.connect("apple_eaten_signal", self, "_grow_snake")
 
 
+# Set the cell on the tile map with the correct sprite
 func draw() -> void:
 	for snake_part in snake_body:
 		snake_world.set_cell(snake_part.x, snake_part.y, SNAKE)
 
 
+# Handle user input
 func _input(event):
 	if Input.is_action_just_pressed("ui_up") and snake_direction != Vector2.DOWN:
 		snake_direction = Vector2.UP
@@ -36,6 +38,7 @@ func _input(event):
 		snake_direction = Vector2.DOWN
 
 
+# Updates the snake position, "removing the tail" and adding another tile in the "direction" vector
 func move() -> void:
 	var remove_body_parts: int = 1 if _grow_snake else 2
 	var new_snake_body: Array
@@ -47,15 +50,18 @@ func move() -> void:
 	snake_head = snake_body[0]
 
 
+# Puts the snake in its original position
 func reset() -> void:
 	snake_body = snake_body_origin
 	snake_direction = Vector2.RIGHT
 
 
+# Return true if the head of the snake is outside the map
 func is_outside_map() -> bool:
-	return snake_head.x > 30 or snake_head.x < 0 or snake_head.y > 30 or snake_head.y < 0#TODO: snake_world.GAME_SIZE
+	return snake_head.x > snake_world.GAME_SIZE or snake_head.x < 0 or snake_head.y > snake_world.GAME_SIZE or snake_head.y < 0
 
 
+# Return true if the head is over any other part of the snake
 func is_eating_itself() -> bool:
 	for part in snake_body.slice(1, snake_body.size() -1):
 		if part == snake_head:
@@ -64,5 +70,6 @@ func is_eating_itself() -> bool:
 	return false
 
 
+# Event to indicate that we must make the snake grow
 func _grow_snake() -> void:
 	_grow_snake = true

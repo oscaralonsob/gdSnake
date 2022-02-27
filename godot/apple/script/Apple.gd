@@ -13,17 +13,21 @@ func _ready() -> void:
 	EventBus.connect("apple_eaten_signal", self, "place")
 
 
+
+# Place the apple elsewhere and draw it
 func update_position() -> void:
 	place()
 	draw()
 
 
+# Choose a random place where the apple will be placed
 func place() -> void:
 	randomize()
-	var x: int = randi() % 30 #TODO: snake_world.GAME_SIZE
-	var y: int = randi() % 30 #TODO: snake_world.GAME_SIZE
+	var x: int = randi() % snake_world.GAME_SIZE
+	var y: int = randi() % snake_world.GAME_SIZE
 	apple_pos = Vector2(x, y)
 
 
+# Set the cell on the tile map with the correct sprite
 func draw() -> void:
 	snake_world.set_cell(apple_pos.x, apple_pos.y, APPLE)
