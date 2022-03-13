@@ -2,7 +2,7 @@
 
 gdSnake is a small game used to learn Godot. I'm gonna try to finish it in just one weeken from this first commit. 
 
-The project run in **Godot 3**.
+The project runs in **Godot 3**.
 
 ### Features
 
