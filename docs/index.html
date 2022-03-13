@@ -1,246 +1,78 @@
 <!DOCTYPE html>
-<html xmlns='https://www.w3.org/1999/xhtml' lang='' xml:lang=''>
-<head>
-	<meta charset='utf-8' />
-	<meta name='viewport' content='width=device-width, user-scalable=no' />
-	<title>Snake</title>
-	<style type='text/css'>
+<html lang="en">
+  <head>
+      <meta charset="utf-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+      <meta name="description" content="" />
+      <meta name="author" content="" />
+      <title>Snake Game by Oscar Alonso Bustos</title>
+      <!-- Favicon-->
+      <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+      <!-- Font Awesome icons (free version)-->
+      <script src="https://use.fontawesome.com/releases/v5.15.4/js/all.js" crossorigin="anonymous"></script>
+      <!-- Google fonts-->
+      <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css" />
+      <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css" />
+      <!-- Core theme CSS (includes Bootstrap)-->
+      <link href="css/styles.css" rel="stylesheet" />
+  </head>
 
-		body {
-			touch-action: none;
-			margin: 0;
-			border: 0 none;
-			padding: 0;
-			text-align: center;
-			background-color: black;
-		}
+  <body id="page-top">
+    <!-- Game Section-->
+    <section class="section bg-primary color-secondary mb-0" id="game">
+        <div class="section-container">
+            <!-- Game Section Heading-->
+            <h2 class="section-heading text-center text-uppercase">Snake</h2>
+            <h4 class="section-heading text-center">by Oscar Alonso Bustos</h4>
 
-		#canvas {
-			display: block;
-			margin: 0;
-			color: white;
-		}
+            <!-- Game itself-->
+            <div class="section-row content-center">
+            		 <iframe src="godot/index.html" style="height:640px;width:640px;" title="still a test"></iframe>
+            </div>
+        </div>
+    </section>
 
-		#canvas:focus {
-			outline: none;
-		}
+    <!-- All games Section-->
+    <section class="section portfolio bg-secondary color-primary mb-0" id="other-games">
+        <div class="section-container">
+            <!-- Game Section Heading-->
+            <h2 class="section-heading text-center text-uppercase">All games</h2>
 
-		.godot {
-			font-family: 'Noto Sans', 'Droid Sans', Arial, sans-serif;
-			color: #e0e0e0;
-			background-color: #3b3943;
-			background-image: linear-gradient(to bottom, #403e48, #35333c);
-			border: 1px solid #45434e;
-			box-shadow: 0 0 1px 1px #2f2d35;
-		}
+            <!-- Games listing-->
+            <div class="section-row justify-content-center">
+                <!-- Game 1-->
+                <div class="col-6 mb-5">
+                    <div class="portfolio-item mx-auto">
+                        <div class="portfolio-item-caption d-flex content-center h-100 w-100">
+                            <div class="portfolio-item-caption-content text-center color-secondary">
+                                <div class="portfolio-item-title">
+                                  Snake
+                                </div>
+                                <div class="portfolio-item-text">
+                                  Retro snake game that we all played in a nokia phone.
+                                </div>
+                            </div>
+                        </div>
+                        <img class="img-fluid" src="assets/img/snake.png" alt="..." />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
+    <!-- Contact Section-->
+    <section class="section bg-primary color-secondary pb-3" id="contact">
+        <div class="section-container">
+            <!-- Contact Section Heading-->
+            <h2 class="section-heading text-center text-uppercase">Contact</h2>
 
-		/* Status display
-		 * ============== */
-
-		#status {
-			position: absolute;
-			left: 0;
-			top: 0;
-			right: 0;
-			bottom: 0;
-			display: flex;
-			justify-content: center;
-			align-items: center;
-			/* don't consume click events - make children visible explicitly */
-			visibility: hidden;
-		}
-
-		#status-progress {
-			width: 366px;
-			height: 7px;
-			background-color: #38363A;
-			border: 1px solid #444246;
-			padding: 1px;
-			box-shadow: 0 0 2px 1px #1B1C22;
-			border-radius: 2px;
-			visibility: visible;
-		}
-
-		@media only screen and (orientation:portrait) {
-			#status-progress {
-				width: 61.8%;
-			}
-		}
-
-		#status-progress-inner {
-			height: 100%;
-			width: 0;
-			box-sizing: border-box;
-			transition: width 0.5s linear;
-			background-color: #202020;
-			border: 1px solid #222223;
-			box-shadow: 0 0 1px 1px #27282E;
-			border-radius: 3px;
-		}
-
-		#status-indeterminate {
-			height: 42px;
-			visibility: visible;
-			position: relative;
-		}
-
-		#status-indeterminate > div {
-			width: 4.5px;
-			height: 0;
-			border-style: solid;
-			border-width: 9px 3px 0 3px;
-			border-color: #2b2b2b transparent transparent transparent;
-			transform-origin: center 21px;
-			position: absolute;
-		}
-
-		#status-indeterminate > div:nth-child(1) { transform: rotate( 22.5deg); }
-		#status-indeterminate > div:nth-child(2) { transform: rotate( 67.5deg); }
-		#status-indeterminate > div:nth-child(3) { transform: rotate(112.5deg); }
-		#status-indeterminate > div:nth-child(4) { transform: rotate(157.5deg); }
-		#status-indeterminate > div:nth-child(5) { transform: rotate(202.5deg); }
-		#status-indeterminate > div:nth-child(6) { transform: rotate(247.5deg); }
-		#status-indeterminate > div:nth-child(7) { transform: rotate(292.5deg); }
-		#status-indeterminate > div:nth-child(8) { transform: rotate(337.5deg); }
-
-		#status-notice {
-			margin: 0 100px;
-			line-height: 1.3;
-			visibility: visible;
-			padding: 4px 6px;
-			visibility: visible;
-		}
-	</style>
-
-</head>
-<body>
-	<canvas id='canvas'>
-		HTML5 canvas appears to be unsupported in the current browser.<br />
-		Please try updating or use a different browser.
-	</canvas>
-	<div id='status'>
-		<div id='status-progress' style='display: none;' oncontextmenu='event.preventDefault();'><div id ='status-progress-inner'></div></div>
-		<div id='status-indeterminate' style='display: none;' oncontextmenu='event.preventDefault();'>
-			<div></div>
-			<div></div>
-			<div></div>
-			<div></div>
-			<div></div>
-			<div></div>
-			<div></div>
-			<div></div>
-		</div>
-		<div id='status-notice' class='godot' style='display: none;'></div>
-	</div>
-
-	<script type='text/javascript' src='index.js'></script>
-	<script type='text/javascript'>//<![CDATA[
-
-		const GODOT_CONFIG = {"args":[],"canvasResizePolicy":2,"executable":"index","experimentalVK":false,"fileSizes":{"index.pck":98656,"index.wasm":23457204},"gdnativeLibs":[]};
-		var engine = new Engine(GODOT_CONFIG);
-
-		(function() {
-			const INDETERMINATE_STATUS_STEP_MS = 100;
-			var statusProgress = document.getElementById('status-progress');
-			var statusProgressInner = document.getElementById('status-progress-inner');
-			var statusIndeterminate = document.getElementById('status-indeterminate');
-			var statusNotice = document.getElementById('status-notice');
-
-			var initializing = true;
-			var statusMode = 'hidden';
-
-			var animationCallbacks = [];
-			function animate(time) {
-				animationCallbacks.forEach(callback => callback(time));
-				requestAnimationFrame(animate);
-			}
-			requestAnimationFrame(animate);
-
-			function setStatusMode(mode) {
-
-				if (statusMode === mode || !initializing)
-					return;
-				[statusProgress, statusIndeterminate, statusNotice].forEach(elem => {
-					elem.style.display = 'none';
-				});
-				animationCallbacks = animationCallbacks.filter(function(value) {
-					return (value != animateStatusIndeterminate);
-				});
-				switch (mode) {
-					case 'progress':
-						statusProgress.style.display = 'block';
-						break;
-					case 'indeterminate':
-						statusIndeterminate.style.display = 'block';
-						animationCallbacks.push(animateStatusIndeterminate);
-						break;
-					case 'notice':
-						statusNotice.style.display = 'block';
-						break;
-					case 'hidden':
-						break;
-					default:
-						throw new Error('Invalid status mode');
-				}
-				statusMode = mode;
-			}
-
-			function animateStatusIndeterminate(ms) {
-				var i = Math.floor(ms / INDETERMINATE_STATUS_STEP_MS % 8);
-				if (statusIndeterminate.children[i].style.borderTopColor == '') {
-					Array.prototype.slice.call(statusIndeterminate.children).forEach(child => {
-						child.style.borderTopColor = '';
-					});
-					statusIndeterminate.children[i].style.borderTopColor = '#dfdfdf';
-				}
-			}
-
-			function setStatusNotice(text) {
-				while (statusNotice.lastChild) {
-					statusNotice.removeChild(statusNotice.lastChild);
-				}
-				var lines = text.split('\n');
-				lines.forEach((line) => {
-					statusNotice.appendChild(document.createTextNode(line));
-					statusNotice.appendChild(document.createElement('br'));
-				});
-			};
-
-			function displayFailureNotice(err) {
-				var msg = err.message || err;
-				console.error(msg);
-				setStatusNotice(msg);
-				setStatusMode('notice');
-				initializing = false;
-			};
-
-			if (!Engine.isWebGLAvailable()) {
-				displayFailureNotice('WebGL not available');
-			} else {
-				setStatusMode('indeterminate');
-				engine.startGame({
-					'onProgress': function (current, total) {
-						if (total > 0) {
-							statusProgressInner.style.width = current/total * 100 + '%';
-							setStatusMode('progress');
-							if (current === total) {
-								// wait for progress bar animation
-								setTimeout(() => {
-									setStatusMode('indeterminate');
-								}, 500);
-							}
-						} else {
-							setStatusMode('indeterminate');
-						}
-					},
-				}).then(() => {
-					setStatusMode('hidden');
-					initializing = false;
-				}, displayFailureNotice);
-			}
-		})();
-	//]]></script>
-</body>
+            <!-- Footer Social Icons-->
+            <div class="section-row content-center mb-3">
+              <div class="col-12 mb-lg-0 text-center">
+                  <a class="btn btn-outline-light btn-social mx-1" href="https://github.com/oscaralonsob/gdSnake"><i class="fab fa-fw fa-github"></i></a>
+              </div>
+            </div>
+        </div>
+    </section>
+  </body>
 </html>
-
