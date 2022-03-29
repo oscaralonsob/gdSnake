@@ -16,4 +16,4 @@ Basic snake game in 2d, with almost not graphics:
 ### How to play
 
 Move the snake with the arrows (you must click over the game first).
-You can play the game [here](https://oscaralonsob.github.io/gdSnake/)
+You can play the game [here](https://oscaralonsob.github.io/gdGames/)
